@@ -8,6 +8,11 @@ data "azurerm_subnet" "example" {
   resource_group_name  = "data.azurerm_resource_group.example.name"
 }
 
+provider "azurerm" {
+  features {}
+  subscription_id = "cc2aa876-d510-47ae-88fd-87389092e715"
+}
+
 resource "azurerm_network_interface" "example" {
   name                = "test-nic"
   location            = data.azurerm_resource_group.example.location
