@@ -41,3 +41,7 @@ output "o2" {
 output "o3" {
   value = var.v2[1]
 }
+
+output "o4" {
+  value = var.v3[cloud]
+}
