@@ -50,3 +50,8 @@ variable "v10" {}
 output "o10" {
   value=var.v10
 }
+
+variable "env" {}
+output "env" {
+  value = var.env
+}
