@@ -39,5 +39,5 @@ output "o2" {
 }
 
 output "o3" {
-  value = var.v2[0]
+  value = var.v2[1]
 }
