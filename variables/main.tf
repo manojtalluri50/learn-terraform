@@ -47,6 +47,6 @@ output "o4" {
 }
 
 variable "v10" {}
-variable "o10" {
+output "o10" {
   value=var.v10
 }
