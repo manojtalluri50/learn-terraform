@@ -43,5 +43,5 @@ output "o3" {
 }
 
 output "o4" {
-  value = var.v3[cloud]
+  value = var.v3["cloud"]
 }
