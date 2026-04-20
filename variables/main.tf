@@ -32,7 +32,7 @@ output "o1" {
 }
 
 output "o2" {
-  value = "$(var.v1) - Jhon"
+  value = "${var.v1} - Jhon"
 }
 
 output "o3" {
