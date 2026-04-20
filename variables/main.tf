@@ -18,7 +18,10 @@ variable "v1" {
 }
 
 variable "v2" {
-  default = ["Hello",2,true]
+  default = [
+    "Hello",
+    2,
+    true]
 }
 variable "v3" {
   default = {
