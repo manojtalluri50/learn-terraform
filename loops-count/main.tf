@@ -8,7 +8,7 @@ resource "null_resource" "demo" {
 }
 
   provisioner "local-exec" {
-    command="echo $(var.demo[count.index])"
+    command="echo ${var.demo[count.index]}"
   }
 
 variable "demo" {
