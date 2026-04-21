@@ -1,7 +1,7 @@
 resource "local_file" "foo" {
    for_each= var.demo
   content = each.value["content"]
-  filename = "/tmp/$(each.key)"
+  filename = "/tmp/${each.key}"
 }
 
 
