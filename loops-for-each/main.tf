@@ -8,7 +8,8 @@ resource "local_file" "foo" {
 }
 variable "demo" {
   default = {
+    APPLE= "apple"
     ORANGE = "orange",
-     BANANA= "banana"
+    BANANA= "banana"
   }
 }
