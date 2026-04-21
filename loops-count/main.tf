@@ -4,7 +4,7 @@
 
 
 resource "null_resource" "demo" {
-   count =length(var.demo)
+   count =length(var.demo[0])
 }
 
 variable "demo" {
