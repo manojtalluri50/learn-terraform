@@ -12,11 +12,6 @@ resource "azurerm_network_interface" "main" {
   }
 }
 
-resource "azurerm_network_interface_security_group_association" "example" {
-  network_interface_id      = azurerm_network_interface.main.id
-  network_security_group_id = azurerm_network_security_group.main.id
-}
-
 resource "azurerm_network_security_group" "main" {
   name                = "${var.component}-nsg"
   location            = data.azurerm_resource_group.example.location
@@ -38,6 +33,13 @@ resource "azurerm_network_security_group" "main" {
     environment = var.component
   }
 }
+
+resource "azurerm_network_interface_security_group_association" "example" {
+  network_interface_id      = azurerm_network_interface.main.id
+  network_security_group_id = azurerm_network_security_group.main.id
+}
+
+
 resource "azurerm_public_ip" "main" {
   name                = "${var.component}-ip"
   resource_group_name = data.azurerm_resource_group.example.name
