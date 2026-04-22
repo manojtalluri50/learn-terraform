@@ -1,11 +1,3 @@
-terraform {
-  required_providers {
-    null = {
-      source  = "hashicorp/null"
-      version = "3.2.4"
-    }
-  }
-}
 resource "azurerm_network_interface" "main" {
   name                = "${var.component}-nic"
   location            = data.azurerm_resource_group.example.location
