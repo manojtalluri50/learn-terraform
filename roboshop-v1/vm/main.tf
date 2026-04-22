@@ -110,7 +110,7 @@ resource "null_resource" "ansible" {
   provisioner "remote-exec" {
 
     connection {
-      tyoe="ssh"
+      type="ssh"
       user="testadmin"
       password = "Password1234!"
       host= azurerm_public_ip.main.ip_address
