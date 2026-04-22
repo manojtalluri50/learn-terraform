@@ -113,8 +113,7 @@ resource "null_resource" "ansible" {
     }
     inline = [
       "sudo dnf install python3.12-pip -y",
-      "sudo pip3.12 install ansible",
-
+      "sudo pip3.12 install ansible"
     ]
 
   }
