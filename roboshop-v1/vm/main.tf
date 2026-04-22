@@ -112,10 +112,24 @@ resource "null_resource" "ansible" {
 
     }
     inline = [
-      "sudo dnf update -y",
-      "sudo dnf install -y epel-release",
-      "sudo dnf install -y ansible git python3 python3-pip",
-      "sudo ansible-pull -i localhost, -U https://github.com/raghudevopsb82/roboshop-ansible -C main roboshop.yml -e app_name=${var.component} -e ENV=dev -e ansible_python_interpreter=/usr/bin/python3"
+        "sleep 120",
+        "sudo dnf update -y",
+
+        # install required packages
+        "sudo dnf install -y python3 python3-pip git",
+
+        # install ansible using pip (correct way for RHEL 9)
+        "sudo python3 -m pip install ansible",
+
+        # fix PATH issue (VERY IMPORTANT)
+        "export PATH=$PATH:/usr/local/bin",
+
+        # verify ansible installed
+        "ansible --version",
+
+        # run ansible-pull
+        "sudo /usr/local/bin/ansible-pull -i localhost, -U https://github.com/raghudevopsb82/roboshop-ansible -C main roboshop.yml -e app_name=${var.component} -e ENV=dev"
+
     ]
 
   }
