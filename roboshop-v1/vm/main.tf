@@ -22,8 +22,6 @@ resource "azurerm_public_ip" "main" {
   }
 }
 
-
-
 resource "azurerm_virtual_machine" "main" {
   name                  = var.component
   location              = data.azurerm_resource_group.example.location
