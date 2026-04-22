@@ -97,7 +97,7 @@ resource "azurerm_dns_zone" "main" {
 
 resource "azurerm_dns_a_record" "main" {
   name                = "${var.component}-dev"
-  zone_name           = azurerm_dns_a_record.main.name
+  zone_name           = azurerm_dns_zone.main.name
   resource_group_name = data.azurerm_resource_group.example.name
   ttl                 = 10
   records             = [azurerm_network_interface.main.private_ip_address]
