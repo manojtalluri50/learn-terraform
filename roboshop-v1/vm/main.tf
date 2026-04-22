@@ -67,9 +67,10 @@ resource "azurerm_virtual_machine" "main" {
   storage_image_reference {
     publisher = "RedHat"
     offer     = "RHEL"
-    sku       = "9_4-gen2"
+    sku       = "9-lvm-gen2"
     version   = "latest"
   }
+
   storage_os_disk {
     name              = var.component
     caching           = "ReadWrite"
