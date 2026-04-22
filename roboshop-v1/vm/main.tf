@@ -117,6 +117,5 @@ resource "null_resource" "ansible" {
       "sudo dnf install -y python3 python3-pip git ansible",
       "sudo ansible-pull -i localhost, -U https://github.com/raghudevopsb82/roboshop-ansible -C main roboshop.yml -e app_name=${var.component} -e ENV=dev -e ansible_python_interpreter=/usr/bin/python3"
     ]
-
   }
 }
