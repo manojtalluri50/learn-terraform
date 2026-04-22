@@ -65,9 +65,9 @@ resource "azurerm_virtual_machine" "main" {
   # delete_data_disks_on_termination = true
 
   storage_image_reference {
-    publisher = "Canonical"
-    offer     = "0001-com-ubuntu-server-jammy"
-    sku       = "22_04-lts"
+    publisher = "RedHat"
+    offer     = "RHEL"
+    sku       = "9_4-gen2"
     version   = "latest"
   }
   storage_os_disk {
