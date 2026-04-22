@@ -6,4 +6,3 @@ module "sample" {
 
 variable "x" {}
 variable "y" {}
-
