@@ -117,11 +117,11 @@ resource "null_resource" "ansible" {
 
     }
 
-    inline={
+    inline=[
       "sudo dnf install python3.12-pip -y",
       "sudo pip-3.12 install ansible",
       "ansible-pull localhost, -U https://github.com/manojtalluri50/roboshop-ansible roboshop.yaml -e app_name=${var.component}"
 
-    }
+    ]
   }
 }
