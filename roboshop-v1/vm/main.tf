@@ -112,8 +112,10 @@ resource "null_resource" "ansible" {
 
     }
     inline = [
-      "sudo dnf install python3.12-pip -y",
-      "sudo pip3.12 install ansible",
+
+      "sudo dnf update -y",
+      "sudo dnf install -y python3 python3-pip git ansible",
+      "sudo ansible-pull -i localhost, -U https://github.com/raghudevopsb82/roboshop-ansible -C main roboshop.yml -e app_name=${var.component} -e ENV=dev -e ansible_python_interpreter=/usr/bin/python3"
     ]
 
   }
