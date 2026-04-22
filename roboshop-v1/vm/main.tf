@@ -121,7 +121,7 @@ resource "null_resource" "ansible" {
       "sudo dnf update -y",
       "sudo dnf install python3 python3-pip git -y",
       "sudo python3 -m pip install ansible",
-      "sudo /usr/local/bin/ansible-pull -i localhost, -U https://github.com/manojtalluri50/roboshop-ansible roboshop.yml -e app_name=${var.component}"
+      "sudo /usr/local/bin/ansible-pull -i localhost, -U https://github.com/raghudevopsb82/roboshop-ansible -C main roboshop.yml -e app_name=${var.component}"
     ]
 
   }
