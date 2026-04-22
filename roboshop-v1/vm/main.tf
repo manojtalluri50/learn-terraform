@@ -1,3 +1,14 @@
+resource "azurerm_public_ip" "main" {
+  name                = "${var.component}-ip"
+  resource_group_name = data.azurerm_resource_group.example.name
+  location            = data.azurerm_resource_group.example.location
+  allocation_method   = "Static"
+
+  tags = {
+    environment = var.component
+  }
+}
+
 resource "azurerm_network_interface" "main" {
   name                = "${var.component}-nic"
   location            = data.azurerm_resource_group.example.location
@@ -34,24 +45,21 @@ resource "azurerm_network_security_group" "main" {
   }
 }
 
-resource "azurerm_network_interface_security_group_association" "example" {
+resource "azurerm_network_interface_security_group_association" "main" {
   network_interface_id      = azurerm_network_interface.main.id
   network_security_group_id = azurerm_network_security_group.main.id
 }
 
-
-resource "azurerm_public_ip" "main" {
-  name                = "${var.component}-ip"
+resource "azurerm_dns_a_record" "main" {
+  name                = "${var.component}-dev"
+  zone_name           = "azdevopsb82.online"
   resource_group_name = data.azurerm_resource_group.example.name
-  location            = data.azurerm_resource_group.example.location
-  allocation_method   = "Static"
-
-  tags = {
-    environment = var.component
-  }
+  ttl                 = 10
+  records             = [azurerm_network_interface.main.private_ip_address]
 }
 
 resource "azurerm_virtual_machine" "main" {
+  depends_on            = [azurerm_network_interface_security_group_association.main,azurerm_dns_a_record.main]
   name                  = var.component
   location              = data.azurerm_resource_group.example.location
   resource_group_name   = data.azurerm_resource_group.example.name
@@ -90,15 +98,11 @@ resource "azurerm_virtual_machine" "main" {
   }
 }
 
-resource "azurerm_dns_a_record" "main" {
-  name                = "${var.component}-dev"
-  zone_name           = "azdevopsb82.online"
-  resource_group_name = data.azurerm_resource_group.example.name
-  ttl                 = 10
-  records             = [azurerm_network_interface.main.private_ip_address]
-}
 
 resource "null_resource" "ansible" {
+
+  depends_on = [azurerm_virtual_machine.main]
+
   provisioner "remote-exec" {
 
     connection {
