@@ -100,10 +100,6 @@ resource "azurerm_virtual_machine" "main" {
     disable_password_authentication = false
   }
 
-  security_type       = "TrustedLaunch"
-  secure_boot_enabled = true
-  vtpm_enabled        = true
-  
   tags = {
     environment = var.component
   }
