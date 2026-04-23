@@ -87,8 +87,8 @@ resource "azurerm_virtual_machine" "main" {
   }
   os_profile {
     computer_name  = var.component
-    admin_username = "manoj"
-    admin_password = "Manu@19jn5a0508"
+    admin_username = "testadmin"
+    admin_password = "Password1234!"
   }
   os_profile_linux_config {
     disable_password_authentication = false
@@ -106,15 +106,15 @@ resource "null_resource" "ansible" {
 
     connection {
       type      ="ssh"
-      user      = "manoj"
-      password  = "Manu@19jn5a0508"
+      user      ="testadmin"
+      password  = "Password1234!"
       host      = azurerm_public_ip.main.ip_address
 
     }
     inline = [
       "sudo dnf install python3.12-pip -y",
       "sudo pip3.12 install ansible",
-      #"ansible-pull -i localhost, -U https://github.com/manojtalluri50/roboshop-ansible roboshop.yaml -e app_name=${var.component} -e ENV=dev"
+      # "ansible-pull -i localhost, -U https://github.com/manojtalluri50/roboshop-ansible roboshop.yaml -e app_name=${var.component} -e ENV=dev"
     ]
 
   }
