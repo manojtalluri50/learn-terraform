@@ -111,10 +111,11 @@ resource "null_resource" "ansible" {
       host      = azurerm_public_ip.main.ip_address
 
     }
-    inline = [
-      "sudo dnf install python3.12-pip -y",
-      "sudo pip3.12 install ansible",
-      "ansible-pull -i localhost, -U https://github.com/raghudevopsb82/roboshop-ansible roboshop.yml -e app_name=${var.component} -e ENV=dev"
+      inline = [
+        "sudo dnf install git ansible python3-pip -y",
+        "pip3 install jmespath PyYAML requests",
+        "ansible-pull -i localhost, -U https://github.com/raghudevopsb82/roboshop-ansible roboshop.yaml -e app_name=${var.component} -e ENV=dev"
+      ]
     ]
 
   }
