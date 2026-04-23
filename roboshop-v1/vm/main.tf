@@ -1,11 +1,3 @@
-terraform {
-  required_providers {
-    azurerm = {
-      source  = "hashicorp/azurerm"
-      version = "4.49.0"
-    }
-  }
-}
 resource "azurerm_public_ip" "main" {
   name                = "${var.component}-ip"
   resource_group_name = data.azurerm_resource_group.example.name
@@ -81,8 +73,10 @@ resource "azurerm_virtual_machine" "main" {
   # delete_data_disks_on_termination = true
 
   storage_image_reference {
-
-    id="/subscriptions/cc2aa876-d510-47ae-88fd-87389092e715/resourceGroups/project-setup-1/providers/Microsoft.Compute/galleries/devops_practice_rhel9.4/images/devops_practice_rhel9.4/versions/1.0.0"
+    publisher = "RedHat"
+    offer     = "RHEL"
+    sku       = "9-lvm-gen2"
+    version   = "latest"
   }
 
   storage_os_disk {
@@ -99,7 +93,6 @@ resource "azurerm_virtual_machine" "main" {
   os_profile_linux_config {
     disable_password_authentication = false
   }
-
   tags = {
     environment = var.component
   }
