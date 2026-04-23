@@ -1,3 +1,11 @@
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "4.49.0"
+    }
+  }
+}
 resource "azurerm_public_ip" "main" {
   name                = "${var.component}-ip"
   resource_group_name = data.azurerm_resource_group.example.name
@@ -58,7 +66,7 @@ resource "azurerm_dns_a_record" "main" {
   records             = [azurerm_network_interface.main.private_ip_address]
 }
 
-resource "azurerm_virtual_machine" "main" {
+resource "azurerm_linux_virtual_machine" "main" {
   depends_on            = [azurerm_network_interface_security_group_association.main,azurerm_dns_a_record.main]
   name                  = var.component
   location              = data.azurerm_resource_group.example.location
@@ -73,6 +81,7 @@ resource "azurerm_virtual_machine" "main" {
   # delete_data_disks_on_termination = true
 
   storage_image_reference {
+
     id="/subscriptions/cc2aa876-d510-47ae-88fd-87389092e715/resourceGroups/project-setup-1/providers/Microsoft.Compute/galleries/devops_practice_rhel9.4/images/devops_practice_rhel9.4/versions/1.0.0"
   }
 
@@ -82,6 +91,10 @@ resource "azurerm_virtual_machine" "main" {
     create_option     = "FromImage"
     managed_disk_type = "Standard_LRS"
   }
+  security_type       = "TrustedLaunch"
+  secure_boot_enabled = true
+  vtpm_enabled        = true
+
   os_profile {
     computer_name  = var.component
     admin_username = "testadmin"
@@ -97,7 +110,7 @@ resource "azurerm_virtual_machine" "main" {
 
 resource "null_resource" "ansible" {
 
-  depends_on = [azurerm_virtual_machine.main]
+  depends_on = [azurerm_linux_virtual_machine.main]
 
   provisioner "remote-exec" {
 
@@ -111,7 +124,7 @@ resource "null_resource" "ansible" {
     inline = [
       "sudo dnf install python3.12-pip -y",
       "sudo pip3.12 install ansible",
-      # "ansible-pull -i localhost, -U https://github.com/manojtalluri50/roboshop-ansible roboshop.yml -e app_name=${var.component} -e ENV=dev"
+      # "ansible-pull -i localhost, -U https://github.com/raghudevopsb82/roboshop-ansible roboshop.yml -e app_name=${var.component} -e ENV=dev"
     ]
 
   }
