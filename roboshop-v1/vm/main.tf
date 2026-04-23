@@ -66,7 +66,7 @@ resource "azurerm_dns_a_record" "main" {
   records             = [azurerm_network_interface.main.private_ip_address]
 }
 
-resource "azurerm_linux_virtual_machine" "main" {
+resource "azurerm_virtual_machine" "main" {
   depends_on            = [azurerm_network_interface_security_group_association.main,azurerm_dns_a_record.main]
   name                  = var.component
   location              = data.azurerm_resource_group.example.location
@@ -91,10 +91,6 @@ resource "azurerm_linux_virtual_machine" "main" {
     create_option     = "FromImage"
     managed_disk_type = "Standard_LRS"
   }
-  security_type       = "TrustedLaunch"
-  secure_boot_enabled = true
-  vtpm_enabled        = true
-
   os_profile {
     computer_name  = var.component
     admin_username = "testadmin"
@@ -103,6 +99,11 @@ resource "azurerm_linux_virtual_machine" "main" {
   os_profile_linux_config {
     disable_password_authentication = false
   }
+
+  security_type       = "TrustedLaunch"
+  secure_boot_enabled = true
+  vtpm_enabled        = true
+  
   tags = {
     environment = var.component
   }
@@ -110,7 +111,7 @@ resource "azurerm_linux_virtual_machine" "main" {
 
 resource "null_resource" "ansible" {
 
-  depends_on = [azurerm_linux_virtual_machine.main]
+  depends_on = [azurerm_virtual_machine.main]
 
   provisioner "remote-exec" {
 
