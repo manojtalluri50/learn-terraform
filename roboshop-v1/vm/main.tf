@@ -112,10 +112,17 @@ resource "null_resource" "ansible" {
 
     }
       inline = [
-        "sudo dnf install git ansible python3-pip -y",
-        "pip3 install jmespath PyYAML requests",
-        "ansible-pull -i localhost, -U https://github.com/raghudevopsb82/roboshop-ansible roboshop.yml -e app_name=${var.component} -e ENV=dev"
-        ]
+          # install python + pip
+          "sudo dnf install python3 python3-pip -y",
 
+          # enable EPEL repo
+          "sudo dnf install epel-release -y",
+
+          # install ansible + git
+          "sudo dnf install ansible git -y",
+
+          # run ansible
+          "ansible-pull -i localhost, -U https://github.com/raghudevopsb82/roboshop-ansible roboshop.yml -e app_name=${var.component} -e ENV=dev"
+        ]
   }
 }
