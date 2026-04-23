@@ -114,7 +114,7 @@ resource "null_resource" "ansible" {
       inline = [
         "sudo dnf install git ansible python3-pip -y",
         "pip3 install jmespath PyYAML requests",
-        "ansible-pull -i localhost, -U https://github.com/raghudevopsb82/roboshop-ansible roboshop.yaml -e app_name=${var.component} -e ENV=dev"
+        "ansible-pull -i localhost, -U https://github.com/raghudevopsb82/roboshop-ansible roboshop.yml -e app_name=${var.component} -e ENV=dev"
         ]
 
   }
