@@ -71,12 +71,11 @@ resource "azurerm_virtual_machine" "main" {
 
   # Uncomment this line to delete the data disks automatically when deleting the VM
   # delete_data_disks_on_termination = true
-
   storage_image_reference {
     publisher = "RedHat"
     offer     = "RHEL"
     sku       = "9-lvm-gen2"
-    version   = "latest"
+    version   = "9.4.2024021202"
   }
 
   storage_os_disk {
