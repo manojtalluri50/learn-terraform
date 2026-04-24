@@ -96,24 +96,24 @@ resource "azurerm_virtual_machine" "main" {
   }
 }
 
-# resource "null_resource" "ansible" {
-#
-#   depends_on = [azurerm_virtual_machine.main]
-#
-#   provisioner "remote-exec" {
-#
-#     connection {
-#       type      ="ssh"
-#       user      ="manoj"
-#       password  = "Manu@19jn5a0508"
-#       host      = azurerm_public_ip.main.ip_address
-#
-#     }
-#     inline = [
-#       "sudo dnf install python3.12-pip -y",
-#       "sudo pip3.12 install ansible",
-#       # "ansible-pull -i localhost, -U https://github.com/manojtalluri50/roboshop-ansible roboshop.yaml -e app_name=${var.component} -e ENV=dev"
-#     ]
-#
-#   }
-# }
+resource "null_resource" "ansible" {
+
+  depends_on = [azurerm_virtual_machine.main]
+
+  provisioner "remote-exec" {
+
+    connection {
+      type      ="ssh"
+      user      ="manoj"
+      password  = "Manu@19jn5a0508"
+      host      = azurerm_public_ip.main.ip_address
+
+    }
+    inline = [
+      "sudo dnf install python3.12-pip -y",
+      "sudo pip3.12 install ansible",
+      # "ansible-pull -i localhost, -U https://github.com/manojtalluri50/roboshop-ansible roboshop.yaml -e app_name=${var.component} -e ENV=dev"
+    ]
+
+  }
+}
