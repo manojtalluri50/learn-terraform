@@ -73,7 +73,7 @@ resource "azurerm_virtual_machine" "main" {
   # delete_data_disks_on_termination = true
   storage_image_reference {
 
-    id="/subscriptions/cc2aa876-d510-47ae-88fd-87389092e715/resourceGroups/project-setup-1/providers/Microsoft.Compute/galleries/devops_practice_rhel9/images/devops_practice_rhel9/versions/0.0.1"
+    id="/subscriptions/cc2aa876-d510-47ae-88fd-87389092e715/resourcegroups/project-setup-1/providers/Microsoft.Compute/galleries/CustomPractice/images/CustomImage/versions/1.0.0"
 
   }
 
