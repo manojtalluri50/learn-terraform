@@ -75,7 +75,7 @@ resource "azurerm_virtual_machine" "main" {
     publisher = "RedHat"
     offer     = "RHEL"
     sku       = "9-lvm-gen2"
-    version   = "9.4.2024030100"
+    version   = "latest"
   }
 
   storage_os_disk {
