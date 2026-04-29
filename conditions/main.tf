@@ -1,3 +1,4 @@
+
 variable "a" {}
 
 output "test" {
@@ -6,4 +7,13 @@ output "test" {
 
 resource "null_resource" "test" {
   count = var.a > 10 ? 0 : 1
+}
+
+
+locals {
+  count = var.a > 10 ? 0 : 1
+}
+
+resource "null_resource" "test1" {
+  count = local.count
 }
