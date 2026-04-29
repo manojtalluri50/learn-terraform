@@ -113,7 +113,7 @@ resource "null_resource" "ansible" {
       "export ANSIBLE_HOST_KEY_CHECKING=False",
       "sudo dnf install -y git python3 python3-pip",
       "sudo pip3 install ansible",
-      "/usr/local/bin/ansible-pull -i localhost  -U https://github.com/manojtalluri50/roboshop-ansible roboshop.yaml -e app_name=${var.component} -e ENV=dev"
+      "ansible-pull -i localhost  -U https://github.com/manojtalluri50/roboshop-ansible roboshop.yaml -e app_name=${var.component} -e ENV=dev"
     ]
   }
 }
