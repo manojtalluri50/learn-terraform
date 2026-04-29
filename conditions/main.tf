@@ -9,7 +9,6 @@ resource "null_resource" "test" {
   count = var.a > 10 ? 0 : 1
 }
 
-
 locals {
   count = var.a > 10 ? 0 : 1
 }
