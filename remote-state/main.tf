@@ -3,7 +3,11 @@ terraform {
     resource_group_name  = "project-setup-1"
     storage_account_name = "d82tfstates"
     container_name       = "tfstates"
-    key                  = "dev.tfstate"
+    key                  = "example.tfstate"
   }
 
+}
+
+output "test1" {
+  value = "Hello"
 }
